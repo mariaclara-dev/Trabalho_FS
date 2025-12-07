@@ -1,18 +1,21 @@
-/* Estilo geral da página */
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #2a0c5a;
-    background: linear-gradient(120deg, #2A0C5A, #7A2C87, #E04A64);
-    color: white;
+body
+{
+     font-family: Arial, Helvetica, sans-serif;
+     background: #2a0c5a;
+     background: linear-gradient(120deg, #2A0C5A, #7A2C87, #E04A64); color: white;
 }
 /* Remove linha dos links e deixa todos brancos */
-.submenus,
-.submenu_0, .submenu_1, .submenu_2, .submenu_3, .submenu_4, .submenu_5,
-.submenu_S, .submenu_O, .submenu_L,
-.submenu_E, .submenu_D, .submenu_I, .submenu_A,
-.voltar,
-.footer-social-redes,
-.botao {
+/* Classe genérica para links brancos sem sublinhado */
+.link-clean
+{
     text-decoration: none;
     color: white;
+    transition: 0.3s ease;
+}
+
+
+/* Hover elegante */
+.link-clean:hover
+{
+    opacity: 0.8;
 }
