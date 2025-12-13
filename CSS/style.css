@@ -3,7 +3,10 @@ body
      font-family: Arial, Helvetica, sans-serif;
      background: #2a0c5a;
      background: linear-gradient(120deg, #2A0C5A, #7A2C87, #E04A64); color: white;
-}
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
 /* Remove linha dos links e deixa todos brancos */
 /* Classe genérica para links brancos sem sublinhado */
 .link-clean
@@ -14,8 +17,90 @@ body
 }
 
 
+
 /* Hover elegante */
-.link-clean:hover
+.link-clean:hover 
 {
     opacity: 0.8;
+}
+header{
+    background-color: #1a1a2e;
+    width: 100%;
+    box-sizing: border-box;
+}
+.container_1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    max-width: 1400px;
+    margin:0 auto;
+} 
+.logo{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+.menu{
+    list-style: none;
+    padding: 0;
+    margin:0;
+    display: flex;
+    gap: 25px;
+}
+/* Cria a LINHA DE DESTAQUE (com pseudo-elemento ::after) */
+.menu > li > .link-clean::after {
+    content: '';
+    display: block;
+    height: 3px; /* Espessura da linha */
+    background-color: #E04A64; /* Cor de destaque (vermelho do seu gradiente) */
+    width: 0; /* Começa invisível */
+    transition: width 0.3s ease-out; /* Animação suave */
+    position: absolute;
+    bottom: 0; 
+    left: 0; /* Começa à esquerda do link */
+}
+
+/* Efeito no hover: a linha aparece */
+.menu > li:hover > .link-clean::after {
+    width: 100%;
+}
+
+/* Para o link ativo (se você adicionar a classe 'active' no HTML) */
+.menu > li.active > .link-clean::after {
+    width: 100%;
+}
+.menu ul {
+    display: none; /* Oculta por padrão */
+    position: absolute;
+    top: 100%; /* Começa logo abaixo do item pai */
+    left: 0;
+    background-color: #1a1a2e; /* Fundo escuro igual ao header */
+    min-width: 250px;
+    padding: 10px 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+    z-index: 1000;
+    list-style: none;
+}
+
+/* Mostra o submenu ao passar o mouse sobre o item pai */
+.menu li:hover > ul {
+    display: block; 
+}
+
+/* Links dentro do submenu */
+.menu ul a.link-clean {
+    padding: 8px 15px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap; /* Impede que o texto quebre a linha */
+}
+
+/* Hover específico para os itens do submenu */
+.menu ul a.link-clean:hover {
+    background-color: rgba(224, 74, 100, 0.2); /* Fundo sutilmente destacado no hover do submenu */
+    opacity: 1; /* Garante visibilidade total */
 }
