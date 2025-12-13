@@ -1,106 +1,405 @@
-body
-{
-     font-family: Arial, Helvetica, sans-serif;
-     background: #2a0c5a;
-     background: linear-gradient(120deg, #2A0C5A, #7A2C87, #E04A64); color: white;
+/* =========================
+   VARIÁVEIS DE CORES
+========================= */
+:root {
+    --roxo-escuro: #2B0A3D;
+    --roxo: #4B1366;
+    --vinho: #7A1E4D;
+    --vermelho: #E6404D;
+    --branco: #ffffff;
+    --azul-escuro: #0b1c2d;
+}
+
+/* =========================
+   RESET
+========================= */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    }
-/* Remove linha dos links e deixa todos brancos */
-/* Classe genérica para links brancos sem sublinhado */
-.link-clean
-{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--branco);
+    background: linear-gradient(
+        135deg,
+        var(--roxo),
+        var(--roxo-escuro),
+        var(--vinho),
+        var(--vermelho)
+    );
+}
+
+/* =========================
+   LINKS
+========================= */
+.link-clean {
     text-decoration: none;
-    color: white;
-    transition: 0.3s ease;
+    color: inherit;
 }
 
-
-
-/* Hover elegante */
-.link-clean:hover 
-{
-    opacity: 0.8;
-}
-header{
-    background-color: #1a1a2e;
+/* =========================
+   HEADER / MENU
+========================= */
+header {
+    position: fixed;
+    top: 0;
     width: 100%;
-    box-sizing: border-box;
+    background: transparent;
+    z-index: 1000;
+    transition: background 0.4s ease;
 }
-.container_1{
+
+header.scrolled {
+    background: var(--azul-escuro);
+}
+
+.container_1 {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px 40px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px 40px;
-    max-width: 1400px;
-    margin:0 auto;
-} 
-.logo{
-    font-size: 1.5em;
-    font-weight: bold;
-    color: white;
-    margin: 0;
+    justify-content: space-between;
 }
-.menu{
+
+.logo {
+    width: 150px;
+}
+
+/* MENU */
+.menu {
     list-style: none;
-    padding: 0;
-    margin:0;
     display: flex;
+    gap: 30px;
+}
+
+.menu > li {
+    position: relative;
+}
+
+.menu a {
+    font-weight: bold;
+    color: var(--branco);
+}
+
+/* SUBMENU */
+.menu ul {
+    display: none;
+    position: absolute;
+    background: var(--azul-escuro);
+    list-style: none;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+}
+
+.menu li:hover ul {
+    display: block;
+}
+
+.menu ul li {
+    padding: 10px;
+}
+
+.menu ul li a:hover {
+    color: blueviolet;
+}
+
+/* =========================
+   INÍCIO / HERO
+========================= */
+.container_2 {
+    padding: 160px 80px 100px;
+    text-align: left;
+}
+
+.container_2 h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.container_2 p {
+    max-width: 520px;
+    font-size: 1.1rem;
+}
+
+/* =========================
+   CAPACITAÇÕES
+========================= */
+.container_3 {
+    padding: 60px 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
 }
-/* Cria a LINHA DE DESTAQUE (com pseudo-elemento ::after) */
-.menu > li > .link-clean::after {
-    content: '';
-    display: block;
-    height: 3px; /* Espessura da linha */
-    background-color: #E04A64; /* Cor de destaque (vermelho do seu gradiente) */
-    width: 0; /* Começa invisível */
-    transition: width 0.3s ease-out; /* Animação suave */
+
+.container_3 h2 {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.cap-item {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.cap-item h3 {
+    margin-bottom: 10px;
+}
+
+.botao {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 25px;
+    background: var(--vermelho);
+    color: var(--branco);
+    border-radius: 25px;
+}
+
+/* =========================
+   SOBRE A ESCOLA
+========================= */
+#sobre-escola {
+    background: #f1f2f4;            /* fundo cinza claro */
+    padding: 120px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sobre-escola p {
+    max-width: 1100px;
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: #0b2a5b;                  /* azul escuro do print */
+    font-weight: 400;
+/*Animação inicial*/
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+#sobre-escola p.show
+{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Palavras em destaque */
+#sobre-escola strong,
+#sobre-escola b {
+    font-weight: 700;
+    color: #0b2a5b;
+}
+
+
+/* ===============================
+   DESTAQUE-SE NO MERCADO
+=============================== */
+
+#destaque-mercado {
+    background: #ffffff;
+    padding: 120px 20px;
+}
+
+/* GRID COM ÁREAS (FORÇA ORDEM VISUAL) */
+.destaque-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+
+    /* ORDEM VISUAL DEFINIDA AQUI */
+    grid-template-areas: "video texto";
+    grid-template-columns: 480px 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* ===============================
+   VÍDEO (ESQUERDA)
+=============================== */
+
+.destaque-video {
+    grid-area: video;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* VÍDEO RETANGULAR (16:9) */
+.video-wrapper {
+    width: 100%;
+    
+    aspect-ratio: 21 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ===============================
+   TEXTO (DIREITA)
+=============================== */
+
+.destaque-texto {
+    grid-area: texto;
+    color: #0b2a5b;
+}
+
+.tag-destaque {
+    display: inline-block;
+    background: #e6404d;
+    color: #ffffff;
+    padding: 6px 22px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+}
+
+.destaque-texto h2 {
+    font-size: 2.3rem;
+    line-height: 1.35;
+    font-weight: 400;
+    margin-bottom: 26px;
+}
+
+.destaque-texto h2 strong {
+    font-weight: 700;
+}
+
+.destaque-texto ul {
+    padding-left: 18px;
+}
+
+.destaque-texto li {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin-bottom: 16px;
+}
+
+/* ===============================
+   RESPONSIVO
+=============================== */
+
+@media (max-width: 900px) {
+    .destaque-grid {
+        grid-template-areas:
+            "video"
+            "texto";
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+
+
+/* =========================
+   CONTATO
+========================= */
+#contato {
+    padding: 80px;
+    text-align: left;
+}
+
+#contato button {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    background: var(--vermelho);
+    color: var(--branco);
+    cursor: pointer;
+}
+
+/* =========================
+   DEPOIMENTOS
+========================= */
+#depoimentos-intro {
+    padding: 80px 80px 20px;
+    text-align: right;
+    color: var(--azul-escuro);
+}
+
+#depoimentos {
+    padding: 20px 80px 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+#depoimentos div {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* =========================
+   SOBRE O ATLÂNTICO
+========================= */
+#sobre-atlântico {
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 40px;
+    align-items: center;
+}
+
+.tag-superior,
+#sobre-atlântico h2,
+#sobre-atlântico p {
+    text-align: center;
+}
+
+.imagem-principal {
+    position: relative;
+}
+
+.selo {
     position: absolute;
-    bottom: 0; 
-    left: 0; /* Começa à esquerda do link */
+    top: 10px;
+    left: 10px;
 }
 
-/* Efeito no hover: a linha aparece */
-.menu > li:hover > .link-clean::after {
-    width: 100%;
+/* =========================
+   ANIMAÇÕES
+========================= */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-/* Para o link ativo (se você adicionar a classe 'active' no HTML) */
-.menu > li.active > .link-clean::after {
-    width: 100%;
-}
-.menu ul {
-    display: none; /* Oculta por padrão */
-    position: absolute;
-    top: 100%; /* Começa logo abaixo do item pai */
-    left: 0;
-    background-color: #1a1a2e; /* Fundo escuro igual ao header */
-    min-width: 250px;
-    padding: 10px 0;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
-    z-index: 1000;
-    list-style: none;
-}
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 900px) {
+    .container_3 {
+        grid-template-columns: 1fr;
+    }
 
-/* Mostra o submenu ao passar o mouse sobre o item pai */
-.menu li:hover > ul {
-    display: block; 
-}
+    #destaque-mercado,
+    #sobre-atlântico {
+        grid-template-columns: 1fr;
+    }
 
-/* Links dentro do submenu */
-.menu ul a.link-clean {
-    padding: 8px 15px;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    white-space: nowrap; /* Impede que o texto quebre a linha */
-}
-
-/* Hover específico para os itens do submenu */
-.menu ul a.link-clean:hover {
-    background-color: rgba(224, 74, 100, 0.2); /* Fundo sutilmente destacado no hover do submenu */
-    opacity: 1; /* Garante visibilidade total */
+    #depoimentos {
+        grid-template-columns: 1fr;
+    }
 }
