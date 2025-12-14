@@ -1,25 +1,14 @@
-window.addEventListener("scroll", () => {
+document.addEventListener("DOMContentLoaded", function () {
     const header = document.querySelector("header");
+    const alturaHeader = header.offsetHeight;
 
-    if (window.scrollY > 80) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
-    }
-});
-document.addEventListener("DOMContentLoaded", () => {
-    const textoSobre = document.querySelector("#sobre-escola p");
-
-    const observer = new IntersectionObserver(
-        ([entry]) => {
-            if (entry.isIntersecting) {
-                textoSobre.classList.add("show");
-            }
-        },
-        {
-            threshold: 0.3
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > alturaHeader) {
+            header.classList.add("header-fixo");
+            document.body.style.paddingTop = alturaHeader + "px";
+        } else {
+            header.classList.remove("header-fixo");
+            document.body.style.paddingTop = "0";
         }
-    );
-
-    observer.observe(textoSobre);
+    });
 });

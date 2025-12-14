@@ -1,405 +1,321 @@
-/* =========================
-   VARIÁVEIS DE CORES
-========================= */
-:root {
-    --roxo-escuro: #2B0A3D;
-    --roxo: #4B1366;
-    --vinho: #7A1E4D;
-    --vermelho: #E6404D;
-    --branco: #ffffff;
-    --azul-escuro: #0b1c2d;
-}
-
-/* =========================
-   RESET
-========================= */
-* {
+/* ======================================================= */
+/* ESTILOS GERAIS E FUNDO (BASE DO SEU CÓDIGO) */
+/* ======================================================= */
+body
+{
+    /* Aplicando a fonte moderna */
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    
+    /* CORRIGIDO: O background-color é fallback e o gradiente é o principal */
+    background-color: #2a0c5a; 
+    background: linear-gradient(120deg, #2A0C5A, #7A2C87, #E04A64); 
+    background-attachment: fixed;
+    
+    color: white; /* Cor do texto */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-    line-height: 1.6;
-    color: var(--branco);
-    background: linear-gradient(
-        135deg,
-        var(--roxo),
-        var(--roxo-escuro),
-        var(--vinho),
-        var(--vermelho)
-    );
-}
-
-/* =========================
-   LINKS
-========================= */
-.link-clean {
+/* Remove linha dos links e deixa todos brancos */
+/* Classe genérica para links brancos sem sublinhado */
+.link-clean
+{
     text-decoration: none;
-    color: inherit;
-}
-
-/* =========================
-   HEADER / MENU
-========================= */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: transparent;
-    z-index: 1000;
-    transition: background 0.4s ease;
-}
-
-header.scrolled {
-    background: var(--azul-escuro);
-}
-
-.container_1 {
-    max-width: 1200px;
-    margin: auto;
-    padding: 15px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    width: 150px;
-}
-
-/* MENU */
-.menu {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-.menu > li {
+    color: white;
+    transition: 0.3s ease;
     position: relative;
+    display:  inline-block;
 }
 
-.menu a {
+/* Hover elegante */
+.link-clean:hover 
+{
+    opacity: 0.8;
+}
+
+/* ======================================================= */
+/* HEADER E MENU HORIZONTAL */
+/* ======================================================= */
+header{
+    background-color: #1a1a2e;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.container_1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    max-width: 1400px;
+    margin:0 auto;
+} 
+.logo{
+    font-size: 1.5em;
     font-weight: bold;
-    color: var(--branco);
+    color: white;
+    margin: 0;
 }
-
-/* SUBMENU */
-.menu ul {
-    display: none;
-    position: absolute;
-    background: var(--azul-escuro);
+.menu{
     list-style: none;
-    top: 100%;
-    left: 0;
-    min-width: 220px;
-}
-
-.menu li:hover ul {
-    display: block;
-}
-
-.menu ul li {
-    padding: 10px;
-}
-
-.menu ul li a:hover {
-    color: blueviolet;
-}
-
-/* =========================
-   INÍCIO / HERO
-========================= */
-.container_2 {
-    padding: 160px 80px 100px;
-    text-align: left;
-}
-
-.container_2 h2 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.container_2 p {
-    max-width: 520px;
-    font-size: 1.1rem;
-}
-
-/* =========================
-   CAPACITAÇÕES
-========================= */
-.container_3 {
-    padding: 60px 80px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    margin:0;
+    display: flex;
     gap: 25px;
 }
 
-.container_3 h2 {
-    grid-column: 1 / -1;
-    text-align: left;
-    margin-bottom: 30px;
+/* Cria a LINHA DE DESTAQUE (com pseudo-elemento ::after) */
+.menu > li > .link-clean::after {
+    content: '';
+    display: block;
+    height: 3px; 
+    background-color: #E04A64; 
+    width: 0; 
+    transition: width 0.3s ease-out; 
+    position: absolute;
+    bottom: -5px; 
+    left: 0; 
+}
+
+/* Efeito no hover: a linha aparece */
+.menu > li:hover > .link-clean::after {
+    width: 100%;
+}
+
+/* Para o link ativo (se você adicionar a classe 'active' no HTML) */
+.menu > li.active > .link-clean::after {
+    width: 100%;
+}
+
+/* Estilo para o submenu (Dropdown) */
+.menu ul {
+    display: none; 
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    background-color: #1a1a2e; 
+    min-width: 250px;
+    padding: 10px 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    z-index: 1000;
+    list-style: none;
+}
+
+/* Mostra o submenu ao passar o mouse sobre o item pai */
+.menu li:hover > ul {
+    display: block; 
+}
+
+/* Links dentro do submenu */
+.menu ul a.link-clean {
+    padding: 8px 15px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap; 
+}
+
+/* Hover específico para os itens do submenu */
+.menu ul a.link-clean:hover {
+    background-color: rgba(224, 74, 100, 0.2); 
+    opacity: 1; 
+}
+
+/* ======================================================= */
+/* LAYOUT E ESTILOS DE CONTEÚDO (APRIMORAMENTOS) */
+/* ======================================================= */
+
+/* Container geral para o conteúdo abaixo do header */
+.container_2, .container_3, #sobre-escola, #destaque-mercado, #contato, #depoimentos-intro, #depoimentos, #sobre-atlântico {
+    max-width: 1000px; 
+    margin: 40px auto; 
+    padding: 0 20px;
+}
+
+/* Títulos principais de seção (h2) */
+h2 {
+    font-size: 2.5em; 
+    margin-top: 50px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+/* Subtítulos (h3) e Destaque */
+h3 {
+    color: #E04A64; 
+    margin-top: 30px;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+/* Estilo para a tag de destaque (como "Destaque-se no mercado") */
+.tag-destaque, .tag-superior {
+    display: inline-block;
+    background-color: #E04A64;
+    color: white;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Estilo da seção de capacitações (para layout em grid, como o site original) */
+#capacitacoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Colunas que se ajustam */
+    gap: 30px;
 }
 
 .cap-item {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.5);
-    padding: 30px;
-    border-radius: 10px;
+    margin-bottom: 0; /* Removido o espaçamento vertical desnecessário */
+    padding-bottom: 0;
+    border-bottom: none; /* Removido o separador horizontal */
+    background-color: rgba(0, 0, 0, 0.1); /* Fundo sutil para o card */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.cap-item h3 {
+/* Estilo para o botão "Saiba mais" */
+.cap-item .botao {
+    display: inline-block; 
+    background-color: #E04A64; 
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cap-item .botao:hover {
+    background-color: #c43c52;
+    opacity: 1; 
+}
+
+/* Estilo para o iframe de vídeo (seção #destaque-mercado) */
+#destaque-mercado iframe {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: 350px; 
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para o botão de Contato (seção #contato) */
+#contato button {
+    background-color: #E04A64;
+    color: white;
+    border: none;
+    padding: 15px 30px; 
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 25px;
+    transition: background-color 0.3s;
+    font-size: 1.1em;
+}
+
+#contato button:hover {
+    background-color: #c43c52;
+}
+
+/* Estilo para a seção de depoimentos */
+#depoimentos {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    justify-content: center;
+}
+
+.video-item { /* Usando a classe mais genérica para as caixas de depoimento */
+    max-width: 250px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.2); 
+    border-radius: 8px;
+    text-align: center;
+}
+
+.video-item iframe {
+    border-radius: 4px;
     margin-bottom: 10px;
 }
 
-.botao {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 25px;
-    background: var(--vermelho);
-    color: var(--branco);
-    border-radius: 25px;
+#depoimentos-intro .subtitulo {
+    color: #E04A64;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
-/* =========================
-   SOBRE A ESCOLA
-========================= */
-#sobre-escola {
-    background: #f1f2f4;            /* fundo cinza claro */
-    padding: 120px 20px;
+/* Imagens e miniaturas */
+.imagem-principal img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+.miniaturas {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#sobre-escola p {
-    max-width: 1100px;
-    text-align: center;
-    font-size: 1.6rem;
-    line-height: 1.7;
-    color: #0b2a5b;                  /* azul escuro do print */
-    font-weight: 400;
-/*Animação inicial*/
-    opacity: 0;
-    transform: translateX(-40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-}
-#sobre-escola p.show
-{
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Palavras em destaque */
-#sobre-escola strong,
-#sobre-escola b {
-    font-weight: 700;
-    color: #0b2a5b;
-}
-
-
-/* ===============================
-   DESTAQUE-SE NO MERCADO
-=============================== */
-
-#destaque-mercado {
-    background: #ffffff;
-    padding: 120px 20px;
-}
-
-/* GRID COM ÁREAS (FORÇA ORDEM VISUAL) */
-.destaque-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-
-    /* ORDEM VISUAL DEFINIDA AQUI */
-    grid-template-areas: "video texto";
-    grid-template-columns: 480px 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-/* ===============================
-   VÍDEO (ESQUERDA)
-=============================== */
-
-.destaque-video {
-    grid-area: video;
-    display: flex;
-    justify-content: flex-start;
-}
-
-/* VÍDEO RETANGULAR (16:9) */
-.video-wrapper {
-    width: 100%;
-    
-    aspect-ratio: 21 / 9;
-    border-radius: 6px;
-    overflow: hidden;
-    background: #000;
-}
-
-.video-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-/* ===============================
-   TEXTO (DIREITA)
-=============================== */
-
-.destaque-texto {
-    grid-area: texto;
-    color: #0b2a5b;
-}
-
-.tag-destaque {
-    display: inline-block;
-    background: #e6404d;
-    color: #ffffff;
-    padding: 6px 22px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 22px;
-}
-
-.destaque-texto h2 {
-    font-size: 2.3rem;
-    line-height: 1.35;
-    font-weight: 400;
-    margin-bottom: 26px;
-}
-
-.destaque-texto h2 strong {
-    font-weight: 700;
-}
-
-.destaque-texto ul {
-    padding-left: 18px;
-}
-
-.destaque-texto li {
-    font-size: 1.05rem;
-    line-height: 1.65;
-    margin-bottom: 16px;
-}
-
-/* ===============================
-   RESPONSIVO
-=============================== */
-
-@media (max-width: 900px) {
-    .destaque-grid {
-        grid-template-areas:
-            "video"
-            "texto";
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-}
-
-
-
-/* =========================
-   CONTATO
-========================= */
-#contato {
-    padding: 80px;
-    text-align: left;
-}
-
-#contato button {
+    flex-wrap: wrap;
+    gap: 15px;
     margin-top: 20px;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 30px;
-    background: var(--vermelho);
-    color: var(--branco);
-    cursor: pointer;
+}
+.miniaturas img {
+    border-radius: 8px;
+    opacity: 0.7; /* Suavidade nas imagens */
+    transition: opacity 0.3s;
+}
+.miniaturas img:hover {
+    opacity: 1;
 }
 
-/* =========================
-   DEPOIMENTOS
-========================= */
-#depoimentos-intro {
-    padding: 80px 80px 20px;
-    text-align: right;
-    color: var(--azul-escuro);
+
+/* ======================================================= */
+/* RODAPÉ */
+/* ======================================================= */
+footer {
+    background-color: #1a1a2e; 
+    color: gray;
+    padding: 50px 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    font-size: 0.9em;
+    line-height: 1.6;
 }
 
-#depoimentos {
-    padding: 20px 80px 80px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+.footer-container, .footer-politicas, .footer-social-endereco, .footer-contato {
+    min-width: 250px;
+    margin-right: 20px;
+    margin-bottom: 30px;
 }
 
-#depoimentos div {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
-    padding: 20px;
-    border-radius: 10px;
+.footer-politicas a, .footer-contato a, .footer-container a {
+    color: #E04A64;
+    text-decoration: none;
 }
 
-/* =========================
-   SOBRE O ATLÂNTICO
-========================= */
-#sobre-atlântico {
-    padding: 80px;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    gap: 40px;
-    align-items: center;
+.footer-social {
+    display: flex;
+    margin-bottom: 15px;
 }
 
-.tag-superior,
-#sobre-atlântico h2,
-#sobre-atlântico p {
-    text-align: center;
+.footer-social img {
+    margin-right: 15px;
 }
-
-.imagem-principal {
-    position: relative;
-}
-
-.selo {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-/* =========================
-   ANIMAÇÕES
-========================= */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-80px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* =========================
-   RESPONSIVO
-========================= */
-@media (max-width: 900px) {
-    .container_3 {
-        grid-template-columns: 1fr;
-    }
-
-    #destaque-mercado,
-    #sobre-atlântico {
-        grid-template-columns: 1fr;
-    }
-
-    #depoimentos {
-        grid-template-columns: 1fr;
-    }
+.header-fixo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
 }
